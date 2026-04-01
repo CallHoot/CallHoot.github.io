@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Michael Sebrell — IT Professional</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --blue: #185FA5;
+    --blue-light: #E6F1FB;
+    --blue-mid: #378ADD;
+    --text: #1a1a1a;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --bg: #f9fafb;
+    --white: #ffffff;
+    --green: #059669;
+    --amber: #d97706;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 40px;
+    height: 60px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo {
+    font-family: 'DM Mono', monospace;
+    font-size: 14px;
+    color: var(--blue);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .nav-links { display: flex; gap: 32px; list-style: none; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--blue); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 100px 40px 60px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .hero-inner { max-width: 680px; }
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--blue);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 28px; height: 1px;
+    background: var(--blue);
+  }
+  .hero h1 {
+    font-size: clamp(40px, 6vw, 64px);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .hero h1 strong { font-weight: 500; color: var(--blue); }
+  .hero-sub {
+    font-size: 17px;
+    color: var(--muted);
+    margin: 20px 0 36px;
+    max-width: 540px;
+    font-weight: 300;
+  }
+  .hero-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 40px; }
+  .tag {
+    background: var(--blue-light);
+    color: var(--blue);
+    font-size: 12px;
+    font-weight: 500;
+    font-family: 'DM Mono', monospace;
+    padding: 5px 12px;
+    border-radius: 4px;
+    letter-spacing: 0.02em;
+  }
+  .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--blue);
+    color: white;
+    padding: 12px 28px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: #0C447C; transform: translateY(-1px); }
+  .btn-secondary {
+    background: white;
+    color: var(--text);
+    padding: 12px 28px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    transition: border-color 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+  .btn-secondary:hover { border-color: var(--blue); color: var(--blue); transform: translateY(-1px); }
+
+  /* ── SECTIONS ── */
+  section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 80px 40px;
+    border-top: 1px solid var(--border);
+  }
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--blue);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-size: 28px;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    margin-bottom: 40px;
+    color: var(--text);
+  }
+  .section-title strong { font-weight: 500; }
+
+  /* ── ABOUT ── */
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+  .about-text p { color: var(--muted); margin-bottom: 16px; font-weight: 300; }
+  .about-text p:last-child { margin-bottom: 0; }
+  .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .stat-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+  }
+  .stat-num {
+    font-size: 32px;
+    font-weight: 500;
+    color: var(--blue);
+    font-family: 'DM Mono', monospace;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat-label { font-size: 12px; color: var(--muted); font-weight: 400; }
+
+  /* ── SKILLS ── */
+  .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+  .skill-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    transition: border-color 0.2s, transform 0.15s;
+  }
+  .skill-card:hover { border-color: var(--blue-mid); transform: translateY(-2px); }
+  .skill-icon {
+    width: 40px; height: 40px;
+    background: var(--blue-light);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 14px;
+    font-size: 18px;
+  }
+  .skill-card h3 { font-size: 14px; font-weight: 500; margin-bottom: 10px; color: var(--text); }
+  .skill-pills { display: flex; flex-wrap: wrap; gap: 6px; }
+  .pill {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: 20px;
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* ── HOME LAB ── */
+  .lab-wrap {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .lab-header {
+    background: var(--blue);
+    padding: 28px 36px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .lab-header h3 { color: white; font-size: 18px; font-weight: 500; }
+  .lab-header .lab-status {
+    display: flex; align-items: center; gap: 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: rgba(255,255,255,0.7);
+  }
+  .status-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: #34d399;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+  .lab-body { display: grid; grid-template-columns: 1fr 1fr; }
+  .lab-col { padding: 28px 36px; }
+  .lab-col:first-child { border-right: 1px solid var(--border); }
+  .lab-col h4 { font-size: 11px; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; font-family: 'DM Mono', monospace; margin-bottom: 18px; }
+  .lab-spec { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--bg); font-size: 13px; }
+  .lab-spec:last-child { border-bottom: none; }
+  .lab-spec .ls-key { color: var(--muted); }
+  .lab-spec .ls-val { font-weight: 500; color: var(--text); text-align: right; }
+  .lab-purpose { margin-top: 8px; }
+  .lab-purpose-item {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--bg);
+    font-size: 13px;
+    color: var(--muted);
+  }
+  .lab-purpose-item:last-child { border-bottom: none; }
+  .lp-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--blue-mid); flex-shrink: 0; margin-top: 7px; }
+
+  /* ── EXPERIENCE ── */
+  .exp-list { display: flex; flex-direction: column; gap: 0; }
+  .exp-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 40px;
+    padding: 36px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .exp-item:last-child { border-bottom: none; }
+  .exp-meta { padding-top: 4px; }
+  .exp-dates { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+  .exp-company { font-size: 13px; font-weight: 500; color: var(--blue); }
+  .exp-type { font-size: 11px; color: var(--muted); margin-top: 4px; }
+  .exp-content h3 { font-size: 17px; font-weight: 500; margin-bottom: 10px; color: var(--text); }
+  .exp-content p { color: var(--muted); font-size: 14px; font-weight: 300; margin-bottom: 14px; }
+  .exp-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .exp-tag {
+    background: var(--blue-light);
+    color: var(--blue);
+    font-size: 11px;
+    font-family: 'DM Mono', monospace;
+    padding: 3px 9px;
+    border-radius: 4px;
+  }
+
+  /* ── CERTS ── */
+  .cert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+  .cert-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px 24px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .cert-badge-icon {
+    width: 44px; height: 44px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Mono', monospace; font-size: 12px; font-weight: 500;
+    flex-shrink: 0;
+  }
+  .cert-badge-icon.progress { background: #FEF3C7; color: #d97706; }
+  .cert-info h4 { font-size: 14px; font-weight: 500; margin-bottom: 4px; }
+  .cert-info span {
+    font-size: 11px;
+    font-family: 'DM Mono', monospace;
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+  .cert-info span.in-progress { background: #FEF3C7; color: #d97706; }
+
+  /* ── CONTACT ── */
+  .contact-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
+  .contact-info h3 { font-size: 20px; font-weight: 400; margin-bottom: 12px; }
+  .contact-info p { color: var(--muted); font-weight: 300; margin-bottom: 24px; }
+  .contact-detail { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; font-size: 14px; }
+  .contact-detail .cd-icon {
+    width: 36px; height: 36px; border-radius: 8px;
+    background: var(--blue-light); display: flex; align-items: center; justify-content: center;
+    font-size: 16px; flex-shrink: 0;
+  }
+  .contact-detail .cd-text { color: var(--muted); }
+  .contact-form { background: white; border: 1px solid var(--border); border-radius: 14px; padding: 32px; }
+  .form-group { margin-bottom: 20px; }
+  .form-group label { display: block; font-size: 12px; font-weight: 500; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; font-family: 'DM Mono', monospace; }
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    transition: border-color 0.2s;
+    outline: none;
+    resize: none;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus { border-color: var(--blue); background: white; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-submit {
+    width: 100%;
+    background: var(--blue);
+    color: white;
+    border: none;
+    padding: 13px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .form-submit:hover { background: #0C447C; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 28px 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  footer p { font-size: 13px; color: var(--muted); }
+  .footer-mono { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--muted); }
+
+  /* ── ANIMATIONS ── */
+  .fade-in { opacity: 0; transform: translateY(16px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    nav { padding: 0 20px; }
+    .nav-links { display: none; }
+    .hero { padding: 90px 20px 48px; }
+    section { padding: 60px 20px; }
+    .about-grid,
+    .lab-body,
+    .contact-wrap { grid-template-columns: 1fr; }
+    .lab-col:first-child { border-right: none; border-bottom: 1px solid var(--border); }
+    .exp-item { grid-template-columns: 1fr; gap: 8px; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 8px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">michael-sebrell</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#lab">Home Lab</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner fade-in">
+    <div class="hero-eyebrow">IT Professional — Gainesville, GA</div>
+    <h1>Michael<br><strong>Sebrell</strong></h1>
+    <p class="hero-sub">Systems engineer with MSP experience in server infrastructure, network administration, and cybersecurity. Pursuing CCNA &amp; Security+.</p>
+    <div class="hero-tags">
+      <span class="tag">Networking</span>
+      <span class="tag">Linux</span>
+      <span class="tag">Proxmox</span>
+      <span class="tag">Azure</span>
+      <span class="tag">pfSense</span>
+      <span class="tag">Active Directory</span>
+      <span class="tag">Cisco Packet Tracer</span>
+      <span class="tag">Ubiquiti</span>
+    </div>
+    <div class="hero-cta">
+      <a href="#contact" class="btn-primary">Get in touch</a>
+      <a href="#experience" class="btn-secondary">View experience</a>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">01 — About</div>
+  <h2 class="section-title">Background &amp; <strong>approach</strong></h2>
+  <div class="about-grid fade-in">
+    <div class="about-text">
+      <p>I'm an IT professional with 2.5+ years of hands-on experience working in a managed service provider environment, supporting diverse client infrastructure across server management, networking, and cybersecurity.</p>
+      <p>Before transitioning into IT, I worked as an HVAC technician and arborist — roles that gave me strong problem-solving instincts, a technical mindset, and the kind of work ethic that comes from physically demanding, precision-critical jobs.</p>
+      <p>I'm a self-driven learner. Much of what I know came from doing — on-the-job training, teaching myself, learning from peers, and building out my home lab. I'm currently focused on formalizing that knowledge through my CCNA and Security+ certifications.</p>
+      <p>I'm open to local opportunities in the Gainesville/Atlanta area as well as fully remote roles.</p>
+    </div>
+    <div class="stat-grid">
+      <div class="stat-card fade-in">
+        <div class="stat-num">2.5+</div>
+        <div class="stat-label">Years in IT</div>
+      </div>
+      <div class="stat-card fade-in">
+        <div class="stat-num">MSP</div>
+        <div class="stat-label">Environment background</div>
+      </div>
+      <div class="stat-card fade-in">
+        <div class="stat-num">3</div>
+        <div class="stat-label">OS platforms (Win/Linux/Mac)</div>
+      </div>
+      <div class="stat-card fade-in">
+        <div class="stat-num">2</div>
+        <div class="stat-label">Certs in progress</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">02 — Skills</div>
+  <h2 class="section-title">Tools &amp; <strong>technologies</strong></h2>
+  <div class="skills-grid">
+    <div class="skill-card fade-in">
+      <div class="skill-icon">🌐</div>
+      <h3>Networking</h3>
+      <div class="skill-pills">
+        <span class="pill">TCP/IP</span>
+        <span class="pill">VLANs</span>
+        <span class="pill">DNS/DHCP</span>
+        <span class="pill">VPN</span>
+        <span class="pill">Cisco</span>
+        <span class="pill">Ubiquiti</span>
+        <span class="pill">Packet Tracer</span>
+        <span class="pill">pfSense</span>
+        <span class="pill">SonicWall</span>
+        <span class="pill">Cat5e/Cat6</span>
+      </div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-icon">🔒</div>
+      <h3>Security</h3>
+      <div class="skill-pills">
+        <span class="pill">Microsoft Azure</span>
+        <span class="pill">Firewall mgmt</span>
+        <span class="pill">Threat response</span>
+        <span class="pill">GPO</span>
+        <span class="pill">Access control</span>
+        <span class="pill">Virtual firewalls</span>
+      </div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-icon">🖥️</div>
+      <h3>Systems & Virtualization</h3>
+      <div class="skill-pills">
+        <span class="pill">Windows Server</span>
+        <span class="pill">Linux</span>
+        <span class="pill">macOS</span>
+        <span class="pill">Proxmox</span>
+        <span class="pill">VMs</span>
+        <span class="pill">Containers</span>
+        <span class="pill">Dell PowerEdge</span>
+      </div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-icon">👤</div>
+      <h3>Identity & Cloud</h3>
+      <div class="skill-pills">
+        <span class="pill">Active Directory</span>
+        <span class="pill">Azure AD</span>
+        <span class="pill">User provisioning</span>
+        <span class="pill">Group policies</span>
+        <span class="pill">Permissions</span>
+      </div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-icon">🔧</div>
+      <h3>Field & End-User Support</h3>
+      <div class="skill-pills">
+        <span class="pill">Hardware repair</span>
+        <span class="pill">VoIP</span>
+        <span class="pill">POS systems</span>
+        <span class="pill">Printers</span>
+        <span class="pill">Remote access</span>
+        <span class="pill">Syncro RMM</span>
+      </div>
+    </div>
+    <div class="skill-card fade-in">
+      <div class="skill-icon">📡</div>
+      <h3>AV & Emerging Tech</h3>
+      <div class="skill-pills">
+        <span class="pill">Broadcast AV</span>
+        <span class="pill">Low-voltage</span>
+        <span class="pill">AI deployment</span>
+        <span class="pill">Raspberry Pi</span>
+        <span class="pill">3D printing</span>
+        <span class="pill">Speaker install</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOME LAB -->
+<section id="lab">
+  <div class="section-label">03 — Home Lab</div>
+  <h2 class="section-title">Always <strong>learning</strong></h2>
+  <div class="lab-wrap fade-in">
+    <div class="lab-header">
+      <h3>Home Lab Environment</h3>
+      <div class="lab-status">
+        <span class="status-dot"></span>
+        Active &amp; expanding
+      </div>
+    </div>
+    <div class="lab-body">
+      <div class="lab-col">
+        <h4>Hardware &amp; infrastructure</h4>
+        <div class="lab-spec"><span class="ls-key">Primary host</span><span class="ls-val">Dell PowerEdge R710</span></div>
+        <div class="lab-spec"><span class="ls-key">Hypervisor</span><span class="ls-val">Proxmox VE</span></div>
+        <div class="lab-spec"><span class="ls-key">Workstation</span><span class="ls-val">Desktop PC</span></div>
+        <div class="lab-spec"><span class="ls-key">Network</span><span class="ls-val">Managed switch</span></div>
+        <div class="lab-spec"><span class="ls-key">Security</span><span class="ls-val">Dedicated firewall/router</span></div>
+        <div class="lab-spec"><span class="ls-key">Uplink</span><span class="ls-val">Fiber internet</span></div>
+      </div>
+      <div class="lab-col">
+        <h4>What I use it for</h4>
+        <div class="lab-purpose">
+          <div class="lab-purpose-item"><span class="lp-dot"></span>Spinning up VMs and containers to simulate real-world environments</div>
+          <div class="lab-purpose-item"><span class="lp-dot"></span>Network segmentation and firewall configuration practice</div>
+          <div class="lab-purpose-item"><span class="lp-dot"></span>Cisco Packet Tracer simulations for CCNA exam prep</div>
+          <div class="lab-purpose-item"><span class="lp-dot"></span>Security+ scenario walkthroughs and threat modeling</div>
+          <div class="lab-purpose-item"><span class="lp-dot"></span>Self-hosted AI model deployment and testing</div>
+          <div class="lab-purpose-item"><span class="lp-dot"></span>Expanding infrastructure as skills grow</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">04 — Experience</div>
+  <h2 class="section-title">Work <strong>history</strong></h2>
+  <div class="exp-list">
+    <div class="exp-item fade-in">
+      <div class="exp-meta">
+        <div class="exp-dates">2024 — Present</div>
+        <div class="exp-company">Current Role</div>
+        <div class="exp-type">Data Annotation</div>
+      </div>
+      <div class="exp-content">
+        <h3>Data Annotator</h3>
+        <p>Annotating and labeling training datasets used to train and improve AI and machine learning models. Applying technical domain knowledge to produce high-quality, consistent annotations on technology-focused tasks.</p>
+        <div class="exp-tags">
+          <span class="exp-tag">AI/ML</span>
+          <span class="exp-tag">Data quality</span>
+          <span class="exp-tag">Attention to detail</span>
+        </div>
+      </div>
+    </div>
+    <div class="exp-item fade-in">
+      <div class="exp-meta">
+        <div class="exp-dates">2022 — 2024</div>
+        <div class="exp-company">MSP</div>
+        <div class="exp-type">Managed Service Provider</div>
+      </div>
+      <div class="exp-content">
+        <h3>Systems Engineer</h3>
+        <p>Supported multi-client infrastructure across server management, network administration, cybersecurity monitoring, and end-user support. Performed data center visits, managed Azure security, configured firewalls, deployed commercial network infrastructure, and handled everything from Active Directory to AV broadcast systems.</p>
+        <div class="exp-tags">
+          <span class="exp-tag">Server mgmt</span>
+          <span class="exp-tag">Azure security</span>
+          <span class="exp-tag">Networking</span>
+          <span class="exp-tag">Active Directory</span>
+          <span class="exp-tag">pfSense</span>
+          <span class="exp-tag">Ubiquiti</span>
+          <span class="exp-tag">Data center</span>
+          <span class="exp-tag">VoIP</span>
+        </div>
+      </div>
+    </div>
+    <div class="exp-item fade-in">
+      <div class="exp-meta">
+        <div class="exp-dates">Prior to IT</div>
+        <div class="exp-company">Solar Industry</div>
+        <div class="exp-type">Field & Compliance</div>
+      </div>
+      <div class="exp-content">
+        <h3>Photovoltaic (Solar) Technician</h3>
+        <p>Installed, repaired, and maintained residential and commercial solar systems including Tesla Powerwall and battery storage. Ran permit documentation, coordinated city inspections, and worked with low-voltage DC systems, inverters, and grid-tie configurations — building hands-on electrical and compliance skills that carry directly into IT infrastructure work.</p>
+        <div class="exp-tags">
+          <span class="exp-tag">Low-voltage DC</span>
+          <span class="exp-tag">Tesla Powerwall</span>
+          <span class="exp-tag">Battery systems</span>
+          <span class="exp-tag">Permit docs</span>
+          <span class="exp-tag">City inspections</span>
+          <span class="exp-tag">Client management</span>
+        </div>
+      </div>
+    </div>
+    <div class="exp-item fade-in">
+      <div class="exp-meta">
+        <div class="exp-dates">Prior to IT</div>
+        <div class="exp-company">HVAC</div>
+        <div class="exp-type">Commercial / Residential</div>
+      </div>
+      <div class="exp-content">
+        <h3>HVAC Technician</h3>
+        <p>Diagnosed and repaired heating and cooling systems across residential and commercial sites. Built strong problem-solving, documentation, and field service habits in a regulated trade environment.</p>
+        <div class="exp-tags">
+          <span class="exp-tag">Field service</span>
+          <span class="exp-tag">Troubleshooting</span>
+          <span class="exp-tag">Client relations</span>
+          <span class="exp-tag">Documentation</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">05 — Contact</div>
+  <h2 class="section-title">Get in <strong>touch</strong></h2>
+  <div class="contact-wrap">
+    <div class="contact-info fade-in">
+      <h3>Open to new opportunities</h3>
+      <p>Looking for IT roles in Help Desk, Networking, or Cybersecurity — local to Gainesville/Atlanta or fully remote. Feel free to reach out.</p>
+      <div class="contact-detail">
+        <div class="cd-icon">📍</div>
+        <span class="cd-text">Gainesville, GA — open to local &amp; remote</span>
+      </div>
+      <div class="contact-detail">
+        <div class="cd-icon">🎓</div>
+        <span class="cd-text">Pursuing CCNA &amp; CompTIA Security+</span>
+      </div>
+      <div class="contact-detail">
+        <div class="cd-icon">⚡</div>
+        <span class="cd-text">Active home lab — always building</span>
+      </div>
+    </div>
+    <div class="contact-form fade-in">
+      <form id="contactForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" placeholder="Your name" required>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="your@email.com" required>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Subject</label>
+          <input type="text" placeholder="What's this about?">
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea rows="5" placeholder="Tell me about the opportunity or project..." required></textarea>
+        </div>
+        <button type="submit" class="form-submit" id="submitBtn">Send message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Michael Sebrell — IT Professional, Gainesville GA</p>
+  <span class="footer-mono">Built to connect. Open to opportunities.</span>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  document.querySelector('.hero .fade-in').classList.add('visible');
+
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    btn.textContent = 'Message sent!';
+    btn.style.background = '#059669';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.textContent = 'Send message';
+      btn.style.background = '';
+      btn.disabled = false;
+      this.reset();
+    }, 3000);
+  });
+</script>
+</body>
+</html>
